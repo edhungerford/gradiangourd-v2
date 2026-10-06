@@ -1,0 +1,1 @@
+{"name":"gradian-gourd","version":"1.0.0","description":"A Discord bot to provide information on my D&D campaign, Tails of Gradia.","main":"index.js","author":"Ed Hungerford","dependencies":{"axios":"^1.13.2","discord.js":"^14.25.1","dotenv":"^17.2.3","nodemon":"^3.1.11"}}
