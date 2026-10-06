@@ -26,9 +26,11 @@ module.exports = {
         const story = await axios.get(process.env['FETCH_BASE'] + game + '/story');
         async function postRecap(storyObject){
             function splitStinger(stinger){
-                return stinger.split("\n").map(sting => `> *${sting.replaceAll("\n", "").replaceAll("\r","")}*`).join("\n"); //I don't think \r should be common, but Riley did it once...
+                return stinger.replaceAll("\r","").split("\n").map(sting => sting == ''? '> ' : `> *${sting.replaceAll("\n", "").replaceAll("\r","")}*`).join("\n"); 
             }
-            const message = storyObject.story.replaceAll("\n", "\n\n");
+           
+            const message = storyObject.story.replaceAll("\r","").replaceAll("\n\n","\n");
+
             if(message.length > 2000){
                 async function chunkify(chunks){
                     let numChunks = Math.floor(chunks.join("").length / 2000) + 1;  // Haha. numChunks.
@@ -36,19 +38,19 @@ module.exports = {
                     let newChunks = [];
                     if(numChunks > 1){
                         for(var i=0;i<numChunks -1;i++){
-                            newChunks[i] = chunks.splice(0,chunkSize).join("\n\n")
+                            newChunks[i] = chunks.splice(0,chunkSize).join("\n\r")
                         }
-                        newChunks.push(chunks.join("\n\n"))
+                        newChunks.push(chunks.join("\n\r"))
                     }
                     finalChunks = [];
                     newChunks.forEach(chunk => chunk.length > 2000? finalChunks.push(...chunkify(chunk)) : finalChunks.push(chunk));
-                    await interaction.editReply(`# ${storyObject.title}\n\n${finalChunks.shift()}`);
+                    await interaction.editReply(`# ${storyObject.title}\n${finalChunks.shift()}`);
                     finalChunks.forEach(async chunk => await interaction.followUp({ content: `${chunk}\n\n${splitStinger(storyObject.stinger) || ""}`}));
                 }
-                let splitMessage = message.split("\n\n");
+                let splitMessage = message.split("\n");
                 chunkify(splitMessage);
             } else {
-                await interaction.editReply(`# ${storyObject.title}\n\n${message}\n\n${splitStinger(storyObject.stinger)}`);
+                await interaction.editReply(`# ${storyObject.title}\n${message.replaceAll("\n\n","\n").replaceAll("\n","\n\n")}\n\n${splitStinger(storyObject.stinger)}`);
             }
         }
         if(title !== "latest"){
