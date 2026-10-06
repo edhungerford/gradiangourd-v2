@@ -1,6 +1,7 @@
 # gradiangourd
 A Discord bot powered by [gradia-api-v2](https://github.com/edhungerford/gradia-api-v2).
 
+## What is this?
 This is one part of a project I started in February of 2022. (Please refer to [gradia-lib-v2](https://github.com/edhungerford/gradia-lib-v2) and [gradia-api-v2](https://github.com/edhungerford/gradia-api-v2) for more context.) I wanted a way to pull the data from my API into Discord easily, so I built this. It also has a few other fun features, like a rudimentary dice roller.
 
 Up until 2026, this project was in its own private repository. Since it represents the bulk of my work with REST APIs and Discord bots, I wanted to make that repository public so I could demonstrate the years of work I put into this. Unfortunately, the commit history for that repository contains some private information I can't readily share, so I moved the files to a new repository that will be their home going forward. If you should desire proof that this has indeed been a project years in the making, consider that [gradia-lib-v2](https://github.com/edhungerford/gradia-lib-v2) was built with `create-react-app` before it was sunset, or that the character portraits on [the Gradia wiki](https://tails.gradia.wiki) are colored with colored pencil and crudely scanned from my phone, which hasn't been my preferred artistic process for years. (This is really convincing evidence if you know me.)
